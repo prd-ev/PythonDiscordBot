@@ -38,6 +38,12 @@ async def on_message(message):
         except Exception:
             msg = "Wrong syntax, try !weather [where]"
             await client.send_message(message.channel, msg)
+        
+    elif message.content.startswith('!trump'):
+        r = requests.get('https://api.whatdoestrumpthink.com/api/v1/quotes/random')
+        r_dict = json.loads(r.text)
+        msg = "Donald Trump: {0}".format(r_dict['message'])
+        await client.send_message(message.channel, msg)
 
 @client.event
 async def on_ready():
